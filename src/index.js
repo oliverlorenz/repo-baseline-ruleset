@@ -18,7 +18,10 @@ function RuleSet(pluginManager, repoPath, config) {
                     .then((package) => {
                         console.log(package)
                         const plugin = package(pluginManager, repoPath);
-                        return plugin.run(callback, ++level, ruleSet.options);
+                        return plugin.run(callback, ++level, ruleSet.options)
+                            .catch((err) => {
+                                console.log(err)
+                            })
                     });
             });
     }
