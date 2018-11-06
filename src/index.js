@@ -1,15 +1,21 @@
 const Promise = require('bluebird');
 
-function RuleSet(packageJson) {
+function RuleSet(config, pluginManager) {
     function getRules() {
-        return packageJson['repo-baseline'] || [];
+        return config || [];
     }
     
     function run(repoPath, options, level, callback) {
-        return Promise.resolve(getRules())
+        const rules = getRules()
+        return Promise.resolve(rules)
             .each((ruleSet) => {
-                const package = require.main.require(ruleSet.name);
-                return package.run(repoPath, ruleSet.options, ++level, callback)
+                return pluginManager.installFromNpm(ruleSet.name)
+                    .then(() => {
+                        return pluginManager.require(ruleSet.name)
+                    })
+                    .then((package) => {
+                        return package.run(repoPath, ruleSet.options, ++level, callback)
+                    });
             });
     }
      
