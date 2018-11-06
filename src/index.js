@@ -16,7 +16,6 @@ function RuleSet(pluginManager, repoPath, config) {
                         return pluginManager.require(ruleSet.name)
                     })
                     .then((package) => {
-                        console.log(package)
                         const plugin = package(pluginManager, repoPath);
                         return plugin.run(callback, ++level, ruleSet.options)
                             .catch((err) => {
