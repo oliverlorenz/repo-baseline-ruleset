@@ -6,7 +6,7 @@ function RuleSet(pluginManager, repoPath, config) {
         return config || packageJson['repo-baseline'] || [];
     }
     
-    function run(callback, level = 1, options = {}) {
+    function run(callback, level = 0, options = {}) {
         const rules = getRules()
         return Promise.resolve(rules)
             .each((ruleSet) => {
