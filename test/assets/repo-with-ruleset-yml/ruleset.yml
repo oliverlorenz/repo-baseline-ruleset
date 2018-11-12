@@ -1,0 +1,4 @@
+---
+- name: a-rule-package
+  options:
+    key: value

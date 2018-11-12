@@ -1,13 +1,12 @@
 const Promise = require('bluebird');
-const packageJson = require('../package.json')
+const yaml = require('js-yaml');
+const fs   = require('fs');
+const packageJson = require('../package.json');
+const getRules = require('./rulesetProvider')
 
 function RuleSet(pluginManager, repoPath, config) {
-    function getRules() {
-        return config || packageJson['repo-baseline'] || [];
-    }
-    
     function run(callback, level = 0, options = {}) {
-        const rules = getRules()
+        const rules = getRules(repoPath, config)
         return Promise.resolve(rules)
             .each((ruleSet) => {
                 console.log(`${"  ".repeat(level)} ${ruleSet.name}`)
@@ -24,7 +23,7 @@ function RuleSet(pluginManager, repoPath, config) {
                     });
             });
     }
-     
+
     return {
         run
     }
