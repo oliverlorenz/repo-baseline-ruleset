@@ -1,0 +1,4 @@
+---
+- name: a-rule-package-from-ruleset-yml
+  options:
+    key: value
