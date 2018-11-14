@@ -8,7 +8,7 @@ describe(__filename, () => {
             process.cwd(), 
             'test/assets/bare-repo'
         );
-        const rules = rulesetProvider(undefined, pathToModule);
+        const rules = rulesetProvider(pathToModule);
         expect(rules).to.include.members([]);
     })
 
@@ -18,7 +18,7 @@ describe(__filename, () => {
                 process.cwd(), 
                 'test/assets/repo-with-package-json'
             );
-            const rules = rulesetProvider(undefined, pathToModule);
+            const rules = rulesetProvider(pathToModule);
             expect(rules.length).equals(1)
             expect(rules[0]).deep.equal({
                 name: 'a-rule-package',
@@ -31,7 +31,7 @@ describe(__filename, () => {
                 process.cwd(), 
                 'test/assets/repo-with-both'
             );
-            const rules = rulesetProvider(undefined, pathToModule);
+            const rules = rulesetProvider(pathToModule);
             expect(rules.length).equals(1)
             expect(rules[0]).deep.equal({
                 name: 'a-rule-package-from-package-json'
@@ -45,7 +45,7 @@ describe(__filename, () => {
                 process.cwd(), 
                 'test/assets/repo-with-ruleset-yml'
             );
-            const rules = rulesetProvider(undefined, pathToModule);
+            const rules = rulesetProvider(pathToModule);
             expect(rules.length).equals(1)
             expect(rules[0]).deep.equal({
                 name: 'a-rule-package',
