@@ -2,7 +2,7 @@ const yaml = require('js-yaml');
 const fs   = require('fs');
 const path = require('path');
 
-function ruleProvider(config, moduleBasePath = '..') {
+function ruleProvider(moduleBasePath = '..', config) {
     function getRulesFromPackageJson() {
         try {
             const packageJson = require(path.join(moduleBasePath, 'package.json'));
